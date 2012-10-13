@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   
   document.getElementById("aboutButton").clickHandler(showAbout);
+  document.getElementById("text").clickHandler(startEditing);
 
   // Wait for transition complete to set the Finished class.
   var about = document.getElementById("about");
@@ -10,16 +11,44 @@ document.addEventListener("DOMContentLoaded", function () {
       about.style.display = "none";
     document.body.classList.add("Finished");
   });
-
-  document.getElementById("editButton").clickHandler(function (e) {
-    // edit.
+  var field = document.getElementById("field");
+  field.addEventListener("webkitTransitionEnd", function () {
+    if(!document.body.classList.contains("Edit"))
+      field.style.display = "none";
+    document.body.classList.add("Finished");
   });
 
-  // Hide about
-  document.getElementById("about").style.display = "none";
+  field.addEventListener("blur", finishEditing);
+
+  about.style.display = "none";
+  field.style.display = "none";
 
   document.body.classList.add("Initialized");
 });
+
+function startEditing () {
+  var field = document.getElementById("field");
+  field.style.display = "";
+  setTimeout(function () {
+    document.body.classList.remove("Finished");
+    document.body.classList.add("Edit");
+    field.focus();
+  }, 0);
+}
+
+function finishEditing () {
+  var field = document.getElementById("field");
+  var text = field.innerText;
+
+  document.body.classList.remove("Finished");
+  document.body.classList.remove("Edit");
+
+  // Process text.
+  if (!text.length)
+    return;
+
+
+}
 
 function showAbout() {
   var about = document.getElementById("about");
@@ -40,6 +69,7 @@ function showAbout() {
 
 function hideAbout() {
   var about = document.getElementById("about");
+  document.body.classList.remove("Finished");
   document.body.classList.remove("About");
   document.body.clickHandler();
   document.getElementById("blurb").clickHandler();
