@@ -13,12 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   var field = document.getElementById("field");
   field.addEventListener("webkitTransitionEnd", function () {
-    if(!document.body.classList.contains("Edit"))
+    if(!document.body.classList.contains("Edit")) {
       field.style.display = "none";
+      field.value = "";
+    }
     document.body.classList.add("Finished");
   });
 
   field.addEventListener("blur", finishEditing);
+
+  setText("Enjoy the show.");
 
   about.style.display = "none";
   field.style.display = "none";
@@ -38,16 +42,26 @@ function startEditing () {
 
 function finishEditing () {
   var field = document.getElementById("field");
-  var text = field.innerText;
+  var text = field.value;
 
   document.body.classList.remove("Finished");
   document.body.classList.remove("Edit");
 
   // Process text.
+  setText(text);
+}
+
+function setText(text) {
+  function noOp () {}
+
+  text = text.replace(/(\S)/g, "<span>$1</span>");
   if (!text.length)
     return;
 
-
+  document.getElementById("text").innerHTML = text;
+  var letters = document.querySelectorAll("#text > span");
+  for (var i = 0; i < letters.length; i++)
+    letters.item(i).clickHandler(noOp);
 }
 
 function showAbout() {

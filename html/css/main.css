@@ -107,12 +107,10 @@ body.About #main {
 @-webkit-keyframes float {
     0% {
         -webkit-transform: none;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
         opacity: 0.8;
     }
     100% {
         -webkit-transform: translateY(-20px);
-        text-shadow: 0 0 30px white;
         opacity: 1;
     }
 }
@@ -137,7 +135,6 @@ body.About #main {
 }
 #text {
     display: inline-block;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
     border-radius: 1em;
 
     /* Prevent flashing when fading */
@@ -147,17 +144,16 @@ body.About #main {
     -webkit-animation: textGlow 2.5s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes textFloat {
-    0% {-webkit-filter: blur(1px);}
-    100% {-webkit-transform: translateY(-10px);}
-}
 #text > span {
     display: inline-block;
-    -webkit-animation: textFloat 2.5s ease-in-out infinite alternate;
+    -webkit-transition: 1s ease-out;
+    -webkit-transition-property: color, -webkit-transform;
 }
-
-#text > span:first-child {
-    text-transform: capitalize;
+#text > span.Hover,
+#text > span.Active {
+    color: #a5a9ad;
+    -webkit-transform: translateY(-10px);
+    -webkit-transition-duration: 0.5s;
 }
 
 @-webkit-keyframes inputGlow {
@@ -218,10 +214,10 @@ body.Edit #text {
 
 @-webkit-keyframes shadowForFloat {
     0% {
-        opacity: 0.15;
+        opacity: 0.13;
     }
     100% {
-        opacity: 0.08;  
+        opacity: 0.05;  
         -webkit-transform: scaleX(0.7);      
     }
 }
@@ -319,7 +315,7 @@ body:not(.Initialized) #about {
     margin: 1em;
 
     text-align: left;
-    color: #363c43;
+    border: 1px solid #a5a9ad;
     font-size: 24px;
 
     background-color: white;
@@ -336,7 +332,6 @@ body.About #blurb {
 }
 
 .MainText {
-    text-transform: lowercase;
     font-size: 60px;
     color: #363c43;
     text-shadow: 0 0 20px white;
