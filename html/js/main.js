@@ -1,7 +1,29 @@
+var mantras = [
+"Love everyone.",
+"Hesitate less.",
+"Do more.",
+"Carry less.",
+"Move more.",
+"Want less.",
+"Worry less.",
+"Experience more.",
+"Smile.",
+"Laugh more.",
+"Forgive more.",
+"Listen more.",
+"Fear less.",
+"Wait less.",
+"Be grateful for something.",
+"Breath.",
+"Enjoy the journey.",
+"Brighten someone's day."
+];
+
 // Init.
 document.addEventListener("DOMContentLoaded", function () {
   
   document.getElementById("aboutButton").clickHandler(showAbout);
+  document.getElementById("refreshButton").clickHandler(refresh);
   document.getElementById("text").clickHandler(startEditing);
 
   // Wait for transition complete to set the Finished class.
@@ -22,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   field.addEventListener("blur", finishEditing);
 
-  setText("Enjoy the show.");
+  setRandomText();
 
   about.style.display = "none";
   field.style.display = "none";
@@ -62,6 +84,20 @@ function setText(text) {
   var letters = document.querySelectorAll("#text > span");
   for (var i = 0; i < letters.length; i++)
     letters.item(i).clickHandler(noOp);
+}
+
+function setRandomText() {
+  setText(mantras[Math.floor(Math.random() * mantras.length)]);
+}
+
+function refresh() {
+  var text = document.getElementById("text");
+  text.style.opacity = 0;
+  // FIXME: for some reason I'm getting 2 transitionEnds, so just use a timer.
+  setTimeout(function () {
+    setRandomText();
+    text.style.opacity = 1;    
+  }, 500);
 }
 
 function showAbout() {
