@@ -72,7 +72,27 @@ body.Green {
 }
 
 body.Orange {
+    @background: #ebe6e1;
+    @fieldBackground: #f0ece9;
+    @mainTextColor: #4a423c;
+    @secondaryTextColor: #ada9a5;
 
+    background-color: @background;
+    #field {
+        background-color: @fieldBackground;
+        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+    }
+    #blurb { border: 1px solid @mainTextColor; }
+    .MainText { color: @mainTextColor; }
+    .SecondaryText { color: @secondaryTextColor; }
+    a, a:visited, a:hover, a:active {
+        color: @secondaryTextColor;
+        border-bottom-color:  @secondaryTextColor;
+    }
+    a:hover, a:active {
+        color: @mainTextColor;
+        border-bottom-color: @mainTextColor;
+    }
 }
 
 body.Cyan {
