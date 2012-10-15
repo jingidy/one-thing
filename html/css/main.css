@@ -107,11 +107,9 @@ body.About #main {
 @-webkit-keyframes float {
     0% {
         -webkit-transform: none;
-        opacity: 0.8;
     }
     100% {
         -webkit-transform: translateY(-20px);
-        opacity: 1;
     }
 }
 #mainStuffz {
@@ -172,12 +170,14 @@ body.About #main {
 #field {
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 2em;
+    right: 2em;
     height: 100%;
 
     display: block;
     opacity: 0;
     -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
 
     box-sizing: border-box;
     border: 1px solid white;
@@ -258,25 +258,26 @@ body.Edit #text {
     z-index: 3;
 }
 
-#aboutButton {
+#refreshButton {
     position: absolute;
-    bottom: 0;
     right: 0;
-    padding: 2em 1em 1em 2em;
+    bottom: 50%;
+    padding-top: 2em;
     border-radius: 100% 0 0 0;
 }
 
-#refreshButton {
+#aboutButton {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 2em 2em 1em 1em;
-    border-radius: 0 100% 0 0;
+    top: 50%;
+    padding-bottom: 2em;
+    right: 0;
+    border-radius: 0 0 0 100%;
 }
 
 .Button {
     width: 1em;
     height: 1em;
+    padding: 1em 1em 1em 2em;
     line-height: 1em;
     text-align: center;
     z-index: 4;
