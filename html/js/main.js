@@ -22,6 +22,7 @@ var mantras = [
 var letterWidth = 50;
 
 var colorClasses = ["Blue", "Pink", "Green", "Orange", "Cyan"];
+var currentColorIndex = 0;
 
 // Init.
 document.addEventListener("DOMContentLoaded", function () {
@@ -98,8 +99,17 @@ function setText(text) {
     return;
 
   document.getElementById("text").innerHTML = text;
+
+  // Store text so it's always the same.
   if (Modernizr.localstorage)
     localStorage["mantra"] = text;
+  // Randomize background color everytime text changes.
+  var randomColor = Math.floor(Math.random() * colorClasses.length);
+  if (randomColor === currentColorIndex)
+    randomColor = (randomColor + 1) % colorClasses.length;
+  document.body.classList.remove(colorClasses[currentColorIndex]);
+  document.body.classList.add(colorClasses[randomColor]);
+  currentColorIndex = randomColor;
 }
 
 function setRandomText() {

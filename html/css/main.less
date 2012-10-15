@@ -120,6 +120,7 @@ body.Cyan {
 }
 
 /*** Real stylez ****/
+@refreshTextDuration: 0.5s;
 
 html, body {
     position: relative;
@@ -136,6 +137,7 @@ body, p, input {
 body {
     font-size: 1em;
     background-image: -webkit-radial-gradient(50% 40%, 50% 50%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    -webkit-transition: background-color @refreshTextDuration ease-in-out;
 }
 
 #main {
@@ -251,9 +253,11 @@ body.About #main {
 
     text-align: center;
     line-height: 1em;
+    color: inherit;
 
     -webkit-transform: translateZ(0);
-    -webkit-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: @refreshTextDuration ease-in-out;
+    -webkit-transition-property: opacity, background-color, background-image;
     -webkit-animation: inputGlow 2.5s ease-in-out infinite alternate;
 }
 
@@ -396,7 +400,8 @@ body:not(.Initialized) #about {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 
     -webkit-transform: translateZ(0);
-    -webkit-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity @refreshTextDuration ease-in-out;
+    -webkit-transition-property: opacity, border-color;
 }
 
 body.About #blurb {
@@ -406,10 +411,12 @@ body.About #blurb {
 .MainText {
     font-size: 60px;
     text-shadow: 0 0 20px white;
+    -webkit-transition: color @refreshTextDuration ease-in-out;
 }
 
 .SecondaryText {
     font-size: 37px;
+    -webkit-transition: color @refreshTextDuration ease-in-out;
 }
 
 .VerticalWrapper {
