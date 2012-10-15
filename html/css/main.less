@@ -1,3 +1,47 @@
+/*** COLORRRRRRSSSSS!!!!! ***/
+body.Blue {
+    @background: #e1e6eb;
+    @fieldBackground: #e7ebef;
+    @fieldBackgroundBottom: #ebeff2;
+    @mainTextColor: #363c43;
+    @secondaryTextColor: #a5a9ad;
+
+    background-color: @background;
+    #field {
+        background-color: @fieldBackground;
+        background-image: -webkit-linear-gradient(@fieldBackground, @fieldBackgroundBottom);
+    }
+    #blurb { border: 1px solid @mainTextColor; }
+    .MainText { color: @mainTextColor; }
+    .SecondaryText { color: @secondaryTextColor; }
+    a, a:visited, a:hover, a:active {
+        color: @secondaryTextColor;
+        border-bottom-color:  @secondaryTextColor;
+    }
+    a:hover, a:active {
+        color: @mainTextColor;
+        border-bottom-color: @mainTextColor;
+    }
+}
+
+body.Pink {
+
+}
+
+body.Green {
+
+}
+
+body.Orange {
+
+}
+
+body.Cyan {
+
+}
+
+/*** Real stylez ****/
+
 html, body {
     position: relative;
     width: 100%;
@@ -12,7 +56,6 @@ body, p, input {
 
 body {
     font-size: 1em;
-    background-color: #e1e6eb;
     background-image: -webkit-radial-gradient(50% 40%, 50% 50%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
@@ -124,13 +167,10 @@ body.About #main {
     box-sizing: border-box;
     border: 1px solid white;
     border-radius: 5px;
-    background-color: #e7ebef;
-    background-image: -webkit-linear-gradient(#e7ebef, #ebeff2);
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.15),
                 0 0 10px 2px rgba(255, 255, 255, 0.25);
 
     text-align: center;
-    color: #363c43;
     line-height: 1em;
 
     -webkit-transform: translateZ(0);
@@ -270,12 +310,10 @@ body:not(.Initialized) #about {
     margin: 1em;
 
     text-align: left;
-    border: 1px solid #a5a9ad;
     font-size: 24px;
 
     background-color: white;
     border-radius: 0.5em;
-    border: 1px solid #363c43;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 
     -webkit-transform: translateZ(0);
@@ -288,13 +326,11 @@ body.About #blurb {
 
 .MainText {
     font-size: 60px;
-    color: #363c43;
     text-shadow: 0 0 20px white;
 }
 
 .SecondaryText {
     font-size: 37px;
-    color: #a5a9ad;
 }
 
 .VerticalWrapper {
@@ -312,12 +348,7 @@ a {
 }
 
 a, a:visited, a:hover, a:active {
-    color: #a5a9ad;
     text-decoration: none;
-    border-bottom: 1px dashed #a5a9ad;
-}
-
-a:hover, a:active {
-    color: #363c43;
-    border-bottom-color: #363c43;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
 }

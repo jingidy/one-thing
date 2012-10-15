@@ -21,6 +21,8 @@ var mantras = [
 // Determine the max # of characters allowed the lazy way.
 var letterWidth = 50;
 
+var colorClasses = ["Blue", "Pink", "Green", "Orange", "Cyan"];
+
 // Init.
 document.addEventListener("DOMContentLoaded", function () {
   
