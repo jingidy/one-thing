@@ -48,7 +48,27 @@ body.Pink {
 }
 
 body.Green {
+    @background: #e3ebe1;
+    @fieldBackground: #eaf0e9;
+    @mainTextColor: #4c554a;
+    @secondaryTextColor: #a7ada5;
 
+    background-color: @background;
+    #field {
+        background-color: @fieldBackground;
+        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+    }
+    #blurb { border: 1px solid @mainTextColor; }
+    .MainText { color: @mainTextColor; }
+    .SecondaryText { color: @secondaryTextColor; }
+    a, a:visited, a:hover, a:active {
+        color: @secondaryTextColor;
+        border-bottom-color:  @secondaryTextColor;
+    }
+    a:hover, a:active {
+        color: @mainTextColor;
+        border-bottom-color: @mainTextColor;
+    }
 }
 
 body.Orange {
