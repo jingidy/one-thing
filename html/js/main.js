@@ -1,7 +1,6 @@
 var mantras = [
 "Love everyone.",
 "Hesitate less.",
-"Do more.",
 "Carry less.",
 "Move more.",
 "Want less.",
@@ -12,11 +11,11 @@ var mantras = [
 "Forgive more.",
 "Listen more.",
 "Fear less.",
-"Wait less.",
 "Be grateful for something.",
 "Breath.",
 "Enjoy the journey.",
-"Brighten someone's day."
+"Brighten someone's day.",
+"Relax"
 ];
 
 // Init.
@@ -44,7 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   field.addEventListener("blur", finishEditing);
 
-  setRandomText();
+  var savedText = Modernizr.localstorage ? localStorage["mantra"] : null;
+  if (savedText)
+    setText(savedText);
+  else
+    setRandomText();
 
   about.style.display = "none";
   field.style.display = "none";
@@ -53,7 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function startEditing () {
+  function finishEditingIfAppropriate(e) {
+    if (e.keyCode !== 13)
+      return;
+    finishEditing();
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   var field = document.getElementById("field");
+  field.addEventListener("keypress", finishEditingIfAppropriate);
   field.style.display = "";
   setTimeout(function () {
     document.body.classList.remove("Finished");
@@ -64,6 +76,7 @@ function startEditing () {
 
 function finishEditing () {
   var field = document.getElementById("field");
+  field.removeEventListener("keypress");
   var text = field.value;
 
   document.body.classList.remove("Finished");
@@ -74,11 +87,13 @@ function finishEditing () {
 }
 
 function setText(text) {
-  text = text.replace(/(\S)/g, "<span>$1</span>");
+  text = text.replace(/\s\s+/g, " ");
   if (!text.length)
     return;
 
   document.getElementById("text").innerHTML = text;
+  if (Modernizr.localstorage)
+    localStorage["mantra"] = text;
 }
 
 function setRandomText() {

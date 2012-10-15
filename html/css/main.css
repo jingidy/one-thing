@@ -90,10 +90,8 @@ body.About #main {
     -webkit-animation: textGlow 2.5s ease-in-out infinite alternate;
 }
 
-#text > span {
-    display: inline-block;
-    -webkit-transition: 1s 0.1s ease-in-out;
-    -webkit-transition-property: color, -webkit-transform;
+#text:first-letter {
+    text-transform: capitalize;
 }
 
 @-webkit-keyframes inputGlow {
