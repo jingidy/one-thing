@@ -74,16 +74,11 @@ function finishEditing () {
 }
 
 function setText(text) {
-  function noOp () {}
-
   text = text.replace(/(\S)/g, "<span>$1</span>");
   if (!text.length)
     return;
 
   document.getElementById("text").innerHTML = text;
-  var letters = document.querySelectorAll("#text > span");
-  for (var i = 0; i < letters.length; i++)
-    letters.item(i).clickHandler(noOp);
 }
 
 function setRandomText() {

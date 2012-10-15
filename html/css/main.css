@@ -95,12 +95,6 @@ body.About #main {
     -webkit-transition: 1s 0.1s ease-in-out;
     -webkit-transition-property: color, -webkit-transform;
 }
-#text > span.Hover,
-#text > span.Active {
-    color: #a5a9ad;
-    -webkit-transform: translateY(-10px);
-    -webkit-transition-duration: 0.5s;
-}
 
 @-webkit-keyframes inputGlow {
     0% {
