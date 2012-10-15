@@ -18,6 +18,9 @@ var mantras = [
 "Relax"
 ];
 
+// Determine the max # of characters allowed the lazy way.
+var letterWidth = 50;
+
 // Init.
 document.addEventListener("DOMContentLoaded", function () {
   
@@ -68,6 +71,7 @@ function startEditing () {
   field.addEventListener("keypress", finishEditingIfAppropriate);
   field.style.display = "";
   setTimeout(function () {
+    field.setAttribute("maxlength", Math.floor(document.getElementById("mainStuffz").offsetWidth / letterWidth));
     document.body.classList.remove("Finished");
     document.body.classList.add("Edit");
     field.focus();
