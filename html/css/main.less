@@ -2,14 +2,13 @@
 body.Blue {
     @background: #e1e6eb;
     @fieldBackground: #e7ebef;
-    @fieldBackgroundBottom: #ebeff2;
     @mainTextColor: #363c43;
     @secondaryTextColor: #a5a9ad;
 
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, @fieldBackgroundBottom);
+        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -25,7 +24,27 @@ body.Blue {
 }
 
 body.Pink {
+    @background: #ebe1e7;
+    @fieldBackground: #f0e9ed;
+    @mainTextColor: #423b40;
+    @secondaryTextColor: #ada5ab;
 
+    background-color: @background;
+    #field {
+        background-color: @fieldBackground;
+        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+    }
+    #blurb { border: 1px solid @mainTextColor; }
+    .MainText { color: @mainTextColor; }
+    .SecondaryText { color: @secondaryTextColor; }
+    a, a:visited, a:hover, a:active {
+        color: @secondaryTextColor;
+        border-bottom-color:  @secondaryTextColor;
+    }
+    a:hover, a:active {
+        color: @mainTextColor;
+        border-bottom-color: @mainTextColor;
+    }
 }
 
 body.Green {
