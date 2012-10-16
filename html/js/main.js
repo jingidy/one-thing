@@ -18,6 +18,30 @@ var mantras = [
 "Relax"
 ];
 
+var M = {
+  eventMapping: {
+    "WebkitTransition": "webkitTransitionEnd",
+    "MozTransition": "transitionend",
+    "OTransition": "oTransitionEnd",
+    "msTransition": "MSTransitionEnd",
+    "transition": "transitionEnd",
+
+    "WebkitAnimation": "webkitAnimationEnd",
+    "MozAnimation": "animationend",
+    "OAnimation": "oAnimationEnd",
+    "msAnimation": "MSAnimationEnd",
+    "transition": "animationend",
+  },
+  
+  prefixed: function (property) {
+    if (property === "transitionEnd")
+      return M.eventMapping[Modernizr.prefixed("transition")];
+    if (property === "animationEnd")
+      return M.eventMapping[Modernizr.prefixed("animation")];
+    return Modernizr.prefixed(property);
+  },
+};
+
 // Determine the max # of characters allowed the lazy way.
 var letterWidth = 50;
 
@@ -33,13 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Wait for transition complete to set the Finished class.
   var about = document.getElementById("about");
-  about.addEventListener("webkitTransitionEnd", function () {
+  about.addEventListener(M.prefixed("transitionEnd"), function () {
     if(!document.body.classList.contains("About"))
       about.style.display = "none";
     document.body.classList.add("Finished");
   });
   var field = document.getElementById("field");
-  field.addEventListener("webkitTransitionEnd", function () {
+  field.addEventListener(M.prefixed("transitionEnd"), function () {
     if(!document.body.classList.contains("Edit")) {
       field.style.display = "none";
       field.value = "";
@@ -152,6 +176,8 @@ function hideAbout() {
 }
 
 Element.prototype.clickHandler = function (func) {
+  var thatFunc = func;
+
   function makeActive(e) {
     e.target.classList.add("Active");
   }
@@ -162,36 +188,34 @@ Element.prototype.clickHandler = function (func) {
   function makeHover(e) {
     e.target.classList.add("Hover");
   }
+  function execute(e) {
+    func(e);
+    makeInactive(e);
+  }
 
   if ("ontouchend" in this) {
     if (!func) {
-      this.removeEventListener("touchstart");
-      this.removeEventListener("touchend");
-      this.removeEventListener("touchcancel");
+      this.removeEventListener("touchstart", makeActive);
+      this.removeEventListener("touchend", makeInactive);
+      this.removeEventListener("touchcancel", execute);
       return;
     }
     this.addEventListener("touchstart", makeActive);
     this.addEventListener("touchcancel", makeInactive);
-    this.addEventListener("touchend", function (e) {
-      func(e);
-      makeInactive(e);
-    });
+    this.addEventListener("touchend", execute);
   } else {
     if (!func) {
-      this.removeEventListener("mouseover");
-      this.removeEventListener("mouseout");
-      this.removeEventListener("mousedown");
-      this.removeEventListener("mouseup");
-      this.removeEventListener("click");
+      this.removeEventListener("mouseover", makeHover);
+      this.removeEventListener("mouseout", makeInactive);
+      this.removeEventListener("mousedown", makeActive);
+      this.removeEventListener("mouseup", makeInactive);
+      this.removeEventListener("click", execute(e));
       return;
     }
     this.addEventListener("mouseover", makeHover);
     this.addEventListener("mouseout", makeInactive);
     this.addEventListener("mousedown", makeActive);
     this.addEventListener("mouseup", makeInactive);
-    this.addEventListener("click", function (e) {
-      func(e);
-      makeInactive(e);
-    });
+    this.addEventListener("click", execute);
   }
 }

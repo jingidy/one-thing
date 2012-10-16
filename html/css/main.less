@@ -8,7 +8,7 @@ body.Blue {
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+        background-image: linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -32,7 +32,7 @@ body.Pink {
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+        background-image: linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -56,7 +56,7 @@ body.Green {
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+        background-image: linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -80,7 +80,7 @@ body.Orange {
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+        background-image: linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -104,7 +104,7 @@ body.Cyan {
     background-color: @background;
     #field {
         background-color: @fieldBackground;
-        background-image: -webkit-linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
+        background-image: linear-gradient(@fieldBackground, lighten(@fieldBackground, 1%));
     }
     #blurb { border: 1px solid @mainTextColor; }
     .MainText { color: @mainTextColor; }
@@ -136,8 +136,8 @@ body, p, input {
 
 body {
     font-size: 1em;
-    background-image: -webkit-radial-gradient(50% 40%, 50% 50%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    -webkit-transition: background-color @refreshTextDuration ease-in-out;
+    background-image: radial-gradient(50% 40%, 50% 50%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    transition: background-color @refreshTextDuration ease-in-out;
 }
 
 #main {
@@ -148,10 +148,10 @@ body {
     min-width: 500px;
 
     overflow: auto;
-    -webkit-user-select: none;    
+    user-select: none;    
 
     opacity: 0;
-    -webkit-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
 body.Initialized #main {
@@ -159,7 +159,7 @@ body.Initialized #main {
 }
 
 body.About #main {
-    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
     opacity: 0;
 }
 
@@ -176,12 +176,12 @@ body.About #main {
     z-index: 2;
 }
 
-@-webkit-keyframes float {
+@keyframes float {
     0% {
-        -webkit-transform: none;
+        transform: none;
     }
     100% {
-        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
     }
 }
 #mainStuffz {
@@ -192,10 +192,25 @@ body.About #main {
     opacity: 0.8;
 
     position: relative;
-    -webkit-animation: float 2.5s ease-in-out infinite alternate;
+    animation: float 2.5s ease-in-out infinite alternate;
 }
 
-@-webkit-keyframes textGlow {
+// Animate opacity on older/slower browsers
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+html.-moz-, html.-o-, html.no-csstransforms {
+    #mainStuffz {
+        animation-name: opacity;
+    }
+}
+
+@keyframes textGlow {
     0% {
         background-color: rgba(255, 255, 255, 0);
         box-shadow: 0 0 25px 25px rgba(255, 255, 255, 0);
@@ -211,17 +226,17 @@ body.About #main {
     border-radius: 1em;
 
     /* Prevent flashing when fading */
-    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 
-    -webkit-transition: opacity 0.5s ease-in-out;
-    -webkit-animation: textGlow 2.5s ease-in-out infinite alternate;
+    transition: opacity 0.5s ease-in-out;
+    animation: textGlow 2.5s ease-in-out infinite alternate;
 }
 
 #text:first-letter {
     text-transform: capitalize;
 }
 
-@-webkit-keyframes inputGlow {
+@keyframes inputGlow {
     0% {
         box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.15),
                     0 0 10px 2px rgba(255, 255, 255, 0.25);
@@ -242,8 +257,8 @@ body.About #main {
 
     display: block;
     opacity: 0;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    tap-highlight-color: transparent;
 
     box-sizing: border-box;
     border: 1px solid white;
@@ -255,10 +270,10 @@ body.About #main {
     line-height: 1em;
     color: inherit;
 
-    -webkit-transform: translateZ(0);
-    -webkit-transition: @refreshTextDuration ease-in-out;
-    -webkit-transition-property: opacity, background-color, background-image;
-    -webkit-animation: inputGlow 2.5s ease-in-out infinite alternate;
+    transform: translateZ(0);
+    transition: @refreshTextDuration ease-in-out;
+    transition-property: opacity, background-color, background-image;
+    animation: inputGlow 2.5s ease-in-out infinite alternate;
 }
 
 #field:focus {
@@ -277,13 +292,13 @@ body.Edit #text {
     opacity: 0;
 }
 
-@-webkit-keyframes shadowForFloat {
+@keyframes shadowForFloat {
     0% {
         opacity: 0.13;
     }
     100% {
         opacity: 0.05;  
-        -webkit-transform: scaleX(0.7);      
+        transform: scaleX(0.7);      
     }
 }
 #shadow {
@@ -295,10 +310,10 @@ body.Edit #text {
     width: 300px;
     height: 34px;
 
-    background-image: -webkit-radial-gradient(contain, black, transparent);
+    background-image: radial-gradient(contain, black, transparent);
     opacity: 0.08;
 
-    -webkit-animation: shadowForFloat 2.5s ease-in-out infinite alternate;
+    animation: shadowForFloat 2.5s ease-in-out infinite alternate;
 
     z-index: 1;
 }
@@ -350,22 +365,22 @@ body.Edit #text {
 
     cursor: pointer;
 
-    -webkit-transition: 0.5s ease-in-out;
-    -webkit-transition-property: box-shadow, background-color;
+    transition: 0.5s ease-in-out;
+    transition-property: box-shadow, background-color;
 
     box-shadow: 0  0 10px 5px rgba(255, 255, 255, 0);
 }
 
 .Button.Hover,
 .Button.Active {
-    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
     box-shadow: 0  0 10px 5px rgba(255, 255, 255, 0.5);
     background-color:  rgba(255, 255, 255, 0.5);
 }
 
 body.About.Finished #main *,
 body.Edit.Finished #mainStuffz #text * {
-    -webkit-animation: none !important;
+    animation: none !important;
 }
 
 #about {
@@ -399,9 +414,9 @@ body:not(.Initialized) #about {
     border-radius: 0.5em;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 
-    -webkit-transform: translateZ(0);
-    -webkit-transition: opacity @refreshTextDuration ease-in-out;
-    -webkit-transition-property: opacity, border-color;
+    transform: translateZ(0);
+    transition: opacity @refreshTextDuration ease-in-out;
+    transition-property: opacity, border-color;
 }
 
 body.About #blurb {
@@ -411,12 +426,12 @@ body.About #blurb {
 .MainText {
     font-size: 60px;
     text-shadow: 0 0 20px white;
-    -webkit-transition: color @refreshTextDuration ease-in-out;
+    transition: color @refreshTextDuration ease-in-out;
 }
 
 .SecondaryText {
     font-size: 37px;
-    -webkit-transition: color @refreshTextDuration ease-in-out;
+    transition: color @refreshTextDuration ease-in-out;
 }
 
 .VerticalWrapper {
@@ -429,8 +444,8 @@ body.About #blurb {
 }
 
 a {
-    -webkit-transition: 0.15s ease-in-out;
-    -webkit-transition-property: color, border-bottom-color;
+    transition: 0.15s ease-in-out;
+    transition-property: color, border-bottom-color;
 }
 
 a, a:visited, a:hover, a:active {
