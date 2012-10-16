@@ -30,7 +30,7 @@ var M = {
     "MozAnimation": "animationend",
     "OAnimation": "oAnimationEnd",
     "msAnimation": "MSAnimationEnd",
-    "transition": "animationend",
+    "transition": "animationend"
   },
   
   prefixed: function (property) {
@@ -39,7 +39,7 @@ var M = {
     if (property === "animationEnd")
       return M.eventMapping[Modernizr.prefixed("animation")];
     return Modernizr.prefixed(property);
-  },
+  }
 };
 
 // Determine the max # of characters allowed the lazy way.
@@ -50,7 +50,6 @@ var currentColorIndex = 0;
 
 // Init.
 document.addEventListener("DOMContentLoaded", function () {
-  
   document.getElementById("aboutButton").clickHandler(showAbout);
   document.getElementById("refreshButton").clickHandler(refresh);
   document.getElementById("text").clickHandler(startEditing);
@@ -82,7 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
   about.style.display = "none";
   field.style.display = "none";
 
-  document.body.classList.add("Initialized");
+  // prefix-free takes a while to process, and we don't wanna show the page until it's done.
+  // But Safari does some weird stuff where it shows contents of body before drawing the background,
+  // so just wait a hella long time to display the page instead of trying to be smart about it.
+  setTimeout(function () {
+    if (!parseFloat(getComputedStyle(document.body)[M.prefixed("transitionDuration")]))
+      return;
+    document.body.classList.add("Initialized"); 
+  }, 1000);
 });
 
 function startEditing () {

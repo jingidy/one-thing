@@ -137,7 +137,8 @@ body, p, input {
 body {
     font-size: 1em;
     background-image: radial-gradient(50% 40%, 50% 50%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    transition: background-color @refreshTextDuration ease-in-out;
+    transition-timing-function: ease-in-out;
+    transition-property: background-color, opacity;
 }
 
 #main {
@@ -150,11 +151,10 @@ body {
     overflow: auto;
     user-select: none;    
 
-    opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
-body.Initialized #main {
+body.Initialized {
     opacity: 1;
 }
 
@@ -443,4 +443,9 @@ a, a:visited, a:hover, a:active {
     text-decoration: none;
     border-bottom-width: 1px;
     border-bottom-style: dashed;
+}
+
+/* This must be at the end because we use it to check if prefix-free is done */
+body {
+    transition-duration: @refreshTextDuration;
 }
