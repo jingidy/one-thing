@@ -188,25 +188,16 @@ body.About #main {
     position: relative;
     margin-left: 2em;
     margin-right: 2em;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
     opacity: 0.8;
 
     position: relative;
     animation: float 2.5s ease-in-out infinite alternate;
 }
 
-// Animate opacity on older/slower browsers
-@keyframes opacity {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-    }
-}
+// Don't animate up and down on older/slower browsers
 html.-moz-, html.-o-, html.no-csstransforms {
     #mainStuffz {
-        animation-name: opacity;
+        animation: none;
     }
 }
 
