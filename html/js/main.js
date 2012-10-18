@@ -52,7 +52,8 @@ var currentColorIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("aboutButton").clickHandler(showAbout);
   document.getElementById("refreshButton").clickHandler(refresh);
-  document.getElementById("text").clickHandler(startEditing);
+  var field = document.getElementById("field");
+  field.clickHandler(startEditing);
 
   // Wait for transition complete to set the Finished class.
   var about = document.getElementById("about");
@@ -61,10 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
       about.style.display = "none";
     document.body.classList.add("Finished");
   });
-  var field = document.getElementById("field");
   field.addEventListener(M.prefixed("transitionEnd"), function () {
     if(!document.body.classList.contains("Edit")) {
-      field.style.display = "none";
       field.value = "";
     }
     document.body.classList.add("Finished");
@@ -79,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setRandomText();
 
   about.style.display = "none";
-  field.style.display = "none";
 
   // prefix-free takes a while to process, and we don't wanna show the page until it's done.
   // But Safari does some weird stuff where it shows contents of body before drawing the background,
@@ -95,11 +93,10 @@ function startEditing () {
 
   var field = document.getElementById("field");
   field.addEventListener("keypress", finishEditingIfAppropriate);
-  field.style.display = "";
   setTimeout(function () {
     field.setAttribute("maxlength", Math.floor(document.getElementById("mainStuffz").offsetWidth / letterWidth));
-    document.body.classList.remove("Finished");
     document.body.classList.add("Edit");
+    document.body.classList.remove("Finished");
     field.focus();
   }, 0);
 }
