@@ -92,13 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function startEditing () {
-  function finishEditingIfAppropriate(e) {
-    if (e.keyCode !== 13)
-      return;
-    finishEditing();
-    e.preventDefault();
-    e.stopPropagation();
-  }
 
   var field = document.getElementById("field");
   field.addEventListener("keypress", finishEditingIfAppropriate);
@@ -111,9 +104,17 @@ function startEditing () {
   }, 0);
 }
 
+function finishEditingIfAppropriate(e) {
+  if (e.keyCode !== 13)
+    return;
+  finishEditing();
+  e.preventDefault();
+  e.stopPropagation();
+}
+
 function finishEditing () {
   var field = document.getElementById("field");
-  field.removeEventListener("keypress");
+  field.removeEventListener("keypress", finishEditingIfAppropriate);
   var text = field.value;
 
   document.body.classList.remove("Finished");
